@@ -324,7 +324,7 @@ defmodule Mix.Tasks.Compile.Proto do
     if Mix.Utils.stale?([Mix.Project.config()[:lockfile]], [buildpath]) do
       build_plugin(s, builddir)
     else
-      %{s | env: system_path_prepend(s.env, builddir)}
+      s
     end
   end
 
@@ -338,7 +338,7 @@ defmodule Mix.Tasks.Compile.Proto do
     move(Path.join(srcdir, @plugin), destpath)
     Mix.shell().info("[protoc] #{destpath} (from dep)")
 
-    %{s | env: system_path_prepend(s.env, destdir)}
+    s
   end
 
   defp install_plugin(s) do
